@@ -20,7 +20,7 @@ const UserIcon = getIcon('User');
 const MapPinIcon = getIcon('MapPin');
 const ArrowRightIcon = getIcon('ArrowRight');
 
-export default function MainFeature() {
+export default function MainFeature({ from, to, date, passengers }) {
   // Sample train data
   const trainOptions = [
     {
@@ -226,7 +226,7 @@ export default function MainFeature() {
                     <h3 className="text-xl font-semibold">Available Trains</h3>
                     <div className="flex items-center space-x-2 text-surface-600 dark:text-surface-400">
                       <MapPinIcon className="h-5 w-5" />
-                      <span>Los Angeles to San Francisco</span>
+                      <span>{from || 'Los Angeles'} to {to || 'San Francisco'}</span>
                     </div>
                   </div>
                   
@@ -268,7 +268,7 @@ export default function MainFeature() {
                               <div className="flex items-center space-x-3 w-full md:w-auto">
                                 <div className="text-right">
                                   <p className="font-semibold">{train.departureTime}</p>
-                                  <p className="text-sm text-surface-500 dark:text-surface-400">Los Angeles</p>
+                                  <p className="text-sm text-surface-500 dark:text-surface-400">{from || 'Los Angeles'}</p>
                                 </div>
                                 <div className="flex flex-col items-center">
                                   <div className="h-0.5 w-10 md:w-16 bg-surface-300 dark:bg-surface-600"></div>
@@ -277,7 +277,7 @@ export default function MainFeature() {
                                 </div>
                                 <div>
                                   <p className="font-semibold">{train.arrivalTime}</p>
-                                  <p className="text-sm text-surface-500 dark:text-surface-400">San Francisco</p>
+                                  <p className="text-sm text-surface-500 dark:text-surface-400">{to || 'San Francisco'}</p>
                                 </div>
                               </div>
                               
@@ -336,12 +336,12 @@ export default function MainFeature() {
                         <div className="flex items-center space-x-3">
                           <div className="text-right">
                             <p className="font-semibold">{selectedTrain.departureTime}</p>
-                            <p className="text-sm text-surface-500 dark:text-surface-400">Los Angeles</p>
+                            <p className="text-sm text-surface-500 dark:text-surface-400">{from || 'Los Angeles'}</p>
                           </div>
                           <ArrowRightIcon className="h-5 w-5 text-surface-400" />
                           <div>
                             <p className="font-semibold">{selectedTrain.arrivalTime}</p>
-                            <p className="text-sm text-surface-500 dark:text-surface-400">San Francisco</p>
+                            <p className="text-sm text-surface-500 dark:text-surface-400">{to || 'San Francisco'}</p>
                           </div>
                         </div>
                       </div>
@@ -571,7 +571,7 @@ export default function MainFeature() {
                           
                           <div className="flex justify-between">
                             <span className="text-surface-600 dark:text-surface-400">Date</span>
-                            <span className="font-medium">July 15, 2023</span>
+                            <span className="font-medium">{date}</span>
                           </div>
                           
                           <div className="flex justify-between">
@@ -581,7 +581,7 @@ export default function MainFeature() {
                           
                           <div className="flex justify-between">
                             <span className="text-surface-600 dark:text-surface-400">Route</span>
-                            <span className="font-medium">LA → SF</span>
+                            <span className="font-medium">{from?.substring(0, 2) || 'LA'} → {to?.substring(0, 2) || 'SF'}</span>
                           </div>
                           
                           <div className="flex justify-between">

@@ -26,7 +26,8 @@ export default function Home() {
     from: '',
     to: '',
     date: format(new Date(), 'yyyy-MM-dd'),
-    passengers: 1
+    passengers: 1,
+    showResults: false
   });
 
   // Handle search form changes
@@ -50,7 +51,12 @@ export default function Home() {
     }
     
     toast.success("Searching for trains. Results will appear shortly!");
-    // In a real app, we would fetch train data here
+    
+    // Set showResults to true to display train options
+    setSearchParams({
+      ...searchParams,
+      showResults: true
+    });
   };
   
   // Quick search by popular route
@@ -58,7 +64,8 @@ export default function Home() {
     setSearchParams({
       ...searchParams,
       from: route.from,
-      to: route.to
+      to: route.to,
+      showResults: true
     });
     
     toast.info(`Selected route: ${route.from} to ${route.to}`);
@@ -248,7 +255,7 @@ export default function Home() {
       </section>
       
       {/* Main Feature */}
-      <MainFeature />
+      {searchParams.showResults && <MainFeature from={searchParams.from} to={searchParams.to} date={searchParams.date} passengers={searchParams.passengers} />}
     </div>
   );
 }
